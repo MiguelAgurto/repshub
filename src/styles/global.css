@@ -325,25 +325,49 @@ textarea {
 }
 
 /* ==========================================================================
-   12. CHART CANVAS
+   12. WORKOUTS BULK CONTROLS
    ========================================================================== */
-canvas {
-  max-width: 100%;
-  display: block;
-  margin: 0 auto var(--space-lg);
+.bulk-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+.bulk-controls button {
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
-   13. RESPONSIVE HELPERS
+   13. PROFILE & FEEDBACK PAGE
    ========================================================================== */
+.profile-page h1,
+.profile-page h2 {
+  margin-bottom: var(--space-md);
+}
+.profile-page section {
+  margin-bottom: var(--space-lg);
+}
+.profile-page textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   14. MOBILE & RESPONSIVE TWEAKS
+   ========================================================================== */
+/* Collapse form-grid to single column under 480px */
+@media (max-width: 480px) {
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* Workout list items wrap on small screens */
 @media (max-width: 600px) {
-  .navbar {
+  .workout-item {
     flex-direction: column;
     align-items: flex-start;
   }
-  .nav-links {
-    flex-wrap: wrap;
-    gap: var(--space-sm);
+  .item-controls {
+    margin-top: var(--space-xs);
   }
 }
 
