@@ -1,11 +1,13 @@
 // File: src/App.jsx
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar'
+import Landing from './pages/Landing'
 import Dashboard from './pages/Dashboard'
 import Workouts from './pages/Workouts'
 import Goals from './pages/Goals'
 import Profile from './pages/Profile'
+import PrivateRoute from './components/PrivateRoute'
 
 export default function App() {
   return (
@@ -13,10 +15,45 @@ export default function App() {
       <NavBar />
       <main>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/workouts" element={<Workouts />} />
-          <Route path="/goals" element={<Goals />} />
-          <Route path="/profile" element={<Profile />} />
+          {/* Public landing */}
+          <Route path="/" element={<Landing />} />
+
+          {/* Auth-protected pages */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/workouts"
+            element={
+              <PrivateRoute>
+                <Workouts />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/goals"
+            element={
+              <PrivateRoute>
+                <Goals />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Catch-all: redirect unknown URLs to landing */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </>
